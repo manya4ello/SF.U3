@@ -4,6 +4,11 @@ class MainClass
 {
 	public static void Main(string[] args)
 	{
+		Console.BackgroundColor = ConsoleColor.Yellow;
+		Console.ForegroundColor = ConsoleColor.DarkBlue;
+		Console.WriteLine("\t Задание по модулю 3 ");
+		Console.BackgroundColor = ConsoleColor.Black;
+		Console.ForegroundColor = ConsoleColor.White;
 
 		Console.Write("What is your name? ");
 		var name = Console.ReadLine();
