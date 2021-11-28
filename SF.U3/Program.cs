@@ -20,10 +20,14 @@ class MainClass
 		DateTime birthday = Convert.ToDateTime(Console.ReadLine());
 		DateTime today = DateTime.Now;
 		var howold = today.Subtract(birthday);
-		var howoldyear = today.Year - birthday.Year; 
-		Console.WriteLine("Your name is {0} and age is {1} ( {2} г.р.) ", name, age, birthday.ToLongDateString());
-		Console.WriteLine("However, according to my calculations you're {0} year old.", howoldyear);
+		var howoldyear = today.Year - birthday.Year;
 		
+		Console.WriteLine("Your name is {0} and age is {1} ( {2} г.р.) ", name, age, birthday.ToLongDateString());
+		if (howoldyear != age)
+		{
+			Console.WriteLine("However, according to my calculations you're {0} this year", howoldyear);
+		}
+
 		Console.Write("What is your favorite day of week? ");
 
 		var day = (DayOfWeek)int.Parse(Console.ReadLine());
@@ -33,7 +37,8 @@ class MainClass
 		}
 		else Console.WriteLine("It seems like you have no favorite day of week");
 		Console.WriteLine("Your favorite day is {0}", day);
-		Console.WriteLine("By the way, {0} was {1}", birthday, birthday.DayOfWeek);
+		Console.WriteLine("By the way, {0} was {1}", birthday.ToLongDateString(), birthday.DayOfWeek);
 		Console.ReadKey();
+		
 	}
 }
