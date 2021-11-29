@@ -27,11 +27,19 @@ class MainClass
 		{
 			Console.WriteLine("However, according to my calculations you're {0} this year", howoldyear);
 		}
-
-		Console.Write("What is your favorite day of week? ");
-
-		var day = (DayOfWeek)int.Parse(Console.ReadLine());
-		
+				
+		int tryday; //проверяет корректность ввода
+		{
+			do
+			{
+				Console.Write("What is your favorite day of week? ");
+				tryday = int.Parse(Console.ReadLine());
+				if (tryday < 0 || tryday > 6)
+					Console.WriteLine("It seems like you imput wrong data");
+			}
+			while (tryday < 0 || tryday > 6);		
+		}
+		var day = (DayOfWeek) tryday;
 		Console.WriteLine("Your favorite day is {0}", day);
 		Console.WriteLine("By the way, {0} was {1}", birthday.ToLongDateString(), birthday.DayOfWeek);
 		Console.ReadKey();
