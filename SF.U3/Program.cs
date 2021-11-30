@@ -12,10 +12,15 @@ class MainClass
 
 		Console.Write("What is your name? ");
 		var name = Console.ReadLine();
-
-		Console.Write("What is your age? ");
-		var age = checked((byte)int.Parse(Console.ReadLine()));
-
+			
+		int age;
+			{
+			Console.Write("What is your age? ");
+			int.TryParse(Console.ReadLine(), out age);
+			if (age == 0)
+				Console.WriteLine("Видимо какая-то ошибка");
+			}
+				
 		Console.Write("What's your birthday date? ");
 		DateTime birthday = Convert.ToDateTime(Console.ReadLine());
 		DateTime today = DateTime.Now;
@@ -30,10 +35,13 @@ class MainClass
 				
 		int tryday; //проверяет корректность ввода
 		{
-			do
-			{
+            do
+            {
+				bool test;
 				Console.Write("What is your favorite day of week? ");
-				tryday = int.Parse(Console.ReadLine());
+				test = int.TryParse(Console.ReadLine(), out tryday);
+				if (test == false)
+					tryday = 100;
 				if (tryday < 0 || tryday > 6)
 					Console.WriteLine("It seems like you imput wrong data");
 			}
