@@ -10,27 +10,29 @@ class MainClass
 		Console.BackgroundColor = ConsoleColor.Black;
 		Console.ForegroundColor = ConsoleColor.White;
 
-		Console.Write("What is your name? ");
+		Console.Write("Ваше имя? ");
 		var name = Console.ReadLine();
-			
+
 		int age;
-			{
-			Console.Write("What is your age? ");
+		{
+			Console.Write("Сколько Вам лет? ");
 			int.TryParse(Console.ReadLine(), out age);
 			if (age == 0)
 				Console.WriteLine("Видимо какая-то ошибка");
-			}
-				
-		Console.Write("What's your birthday date? ");
+		}
+
+		Console.Write("Когда родились? (дд.мм.гг) ");
 		DateTime birthday = Convert.ToDateTime(Console.ReadLine());
 		DateTime today = DateTime.Now;
-		var howold = today.Subtract(birthday);
-		var howoldyear = today.Year - birthday.Year;
-		
-		Console.WriteLine("Your name is {0} and your age is {1} (born - {2}) ", name, age, birthday.ToLongDateString());
+		int howoldyear = today.Year - birthday.Year;  //считает возраст в годах
+		{
+			if (today <= birthday.AddYears(today.Year - birthday.Year)) //если ДР уже прошел - вычитает год
+			howoldyear -= 1;
+			}
+		Console.WriteLine("Уважаемый {0}, Ваш возраст - {1} (родились - {2}) ", name, age, birthday.ToLongDateString());
 		if (howoldyear != age)
 		{
-			Console.WriteLine("However, according to my calculations you're {0} this year", howoldyear);
+			Console.WriteLine("Однако, по моим расчетам, Вам уже {0}!", howoldyear);
 		}
 				
 		int tryday; //проверяет корректность ввода
@@ -38,18 +40,18 @@ class MainClass
             do
             {
 				bool test;
-				Console.Write("What is your favorite day of week? ");
+				Console.Write("Какой ваш любимый день недели?");
 				test = int.TryParse(Console.ReadLine(), out tryday);
 				if (test == false)
 					tryday = 100;
 				if (tryday < 0 || tryday > 6)
-					Console.WriteLine("It seems like you imput wrong data");
+					Console.WriteLine("Фигня какая-то. Введите день недели от 0 до 6");
 			}
 			while (tryday < 0 || tryday > 6);		
 		}
 		var day = (DayOfWeek) tryday;
-		Console.WriteLine("Your favorite day is {0}", day);
-		Console.WriteLine("By the way, {0} was {1}", birthday.ToLongDateString(), birthday.DayOfWeek);
+		Console.WriteLine("Значит {0}...", day);
+		Console.WriteLine("Кстати, {0} (ваш день рождения) был {1}", birthday.ToLongDateString(), birthday.DayOfWeek);
 		Console.ReadKey();
 		
 	}
