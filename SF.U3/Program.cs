@@ -21,15 +21,27 @@ class MainClass
 				Console.WriteLine("Видимо какая-то ошибка");
 		}
 
-		Console.Write("Когда родились? (дд.мм.гг) ");
-		DateTime birthday = Convert.ToDateTime(Console.ReadLine());
+		//Console.Write("Когда родились? (дд.мм.гг) ");
+		//DateTime birthday = Convert.ToDateTime(Console.ReadLine());
+		bool test;
+		DateTime birthday;
+		{
+			do
+			{
+				Console.Write("Когда Вы родились? ");
+				test = DateTime.TryParse(Console.ReadLine(), out birthday);
+				if (test == false)
+					Console.WriteLine("Фигня какая-то. Введите дату в формате дд.мм.гг");
+			}
+			while (test == false);
+		}
 		DateTime today = DateTime.Now;
 		int howoldyear = today.Year - birthday.Year;  //считает возраст в годах
 		{
 			if (today <= birthday.AddYears(today.Year - birthday.Year)) //если ДР уже прошел - вычитает год
 			howoldyear -= 1;
-			}
-		Console.WriteLine("Уважаемый {0}, Ваш возраст - {1} (родились - {2}) ", name, age, birthday.ToLongDateString());
+		}
+		Console.WriteLine("Уважаемый {0}, Вы указали возраст - {1} (родились - {2}) ", name, age, birthday.ToLongDateString());
 		if (howoldyear != age)
 		{
 			Console.WriteLine("Однако, по моим расчетам, Вам уже {0}!", howoldyear);
@@ -39,10 +51,10 @@ class MainClass
 		{
             do
             {
-				bool test;
+				bool testday;
 				Console.Write("Какой ваш любимый день недели?");
-				test = int.TryParse(Console.ReadLine(), out tryday);
-				if (test == false)
+				testday = int.TryParse(Console.ReadLine(), out tryday);
+				if (testday == false)
 					tryday = 100;
 				if (tryday < 0 || tryday > 6)
 					Console.WriteLine("Фигня какая-то. Введите день недели от 0 до 6");
